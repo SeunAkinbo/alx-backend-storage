@@ -1,8 +1,14 @@
--- A SQL script that creayes a table users with
--- id, integer, never null, auto increament and primary key
--- email, string (255 characters), never null and unique
--- name, string (255 characters)
--- if the table exists the script should not fail
--- Executable on any database
+-- Task: Create a table 'users' with specified attributes and constraints
+-- Context: Make an attribute unique directly in the table schema to enforce business rules and avoid bugs in your application
 
+-- Check if the table 'users' already exists and create it if it doesn't
+CREATE TABLE IF NOT EXISTS users (
+	-- Attribute: id, integer, never null, auto increament and primary key
+	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 
+	-- Attribute: email, string (255 characters), never null, auto increment and primary key
+	email VARCHAR(255) NOT NULL UNIQUE,
+
+	-- Attribute: name, string (255 characters)
+	name VARCHAR(255)
+);
