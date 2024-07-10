@@ -4,7 +4,7 @@
 -- Check if the table 'users' already exists and create it if it doesn't
 CREATE TABLE IF NOT EXISTS users (
 	-- Attribute: id, integer, never null, auto increament and primary key
-	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 
 	-- Attribute: email, string (255 characters), never null, auto increment and primary key
 	email VARCHAR(255) NOT NULL UNIQUE,
