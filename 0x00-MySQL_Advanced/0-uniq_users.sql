@@ -2,6 +2,7 @@
 -- Context: Make an attribute unique directly in the table schema to enforce business rules and avoid bugs in your application
 
 -- Check if the table 'users' already exists and create it if it doesn't
+DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users (
 	-- Attribute: id, integer, never null, auto increament and primary key
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
