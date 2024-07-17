@@ -1,41 +1,27 @@
-#!/usr/bin/env python3
-'''Module - web.py.
-'''
+#!usr/bin/env python3
+"""Module - web.py
+"""
 import redis
 import requests
-from functools import wraps
-
-r = redis.Redis()
 
 
-def url_access_count(method):
-    """decorator for get_page function"""
-    @wraps(method)
-    def wrapper(url):
-        """wrapper function"""
-        key = "cached:" + url
-        cached_value = r.get(key)
-        if cached_value:
-            return cached_value.decode("utf-8")
-
-            # Get new content and update cache
-        key_count = "count:" + url
-        html_content = method(url)
-
-        r.incr(key_count)
-        r.set(key, html_content, ex=10)
-        r.expire(key, 10)
-        return html_content
-    return wrapper
+rd = redis.Redis()
 
 
-@url_access_count
 def get_page(url: str) -> str:
-    """obtain the HTML content of a particular"""
-    results = requests.get(url)
-    return results.text
+    """Fetche HTML content of URL, caches it, and tracks access count"""
+    access_count_key = "count:{}".format(url)
+    rd.incr(access_count_key)
+    cached_content_key = "cached:{}".format(url)
+    cached_content = rd.get(cached_content_key)
+
+    if cached_content:
+        return cached_content.decode()
+
+    response = requests.get(url)
+    rd.setex(cached_content_key, 10, response.text)
+    return response.text
 
 
 if __name__ == "__main__":
-    get_page('http://slowwly.robertomurray.co.uk')''
-    return requests.get(url).text
+    print(get_page('http://slowwly.robertomurray.co.uk'))
