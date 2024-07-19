@@ -9,4 +9,4 @@ def list_all(mongo_collection):
     :param mongo_collection: pymongo collection object
     :return: list of documents in the collection, or an empty list if no documents
     """
-    return [doc for doc in mongo_collection.find]
+    return [doc for doc in mongo_collection.find()]
