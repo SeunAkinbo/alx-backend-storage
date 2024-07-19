@@ -10,9 +10,9 @@ def school_by_topic(mongo_collection, topic):
     :param topic: string, the topic to search for
     :return: list of schools having the specific topic
     """
-    topic_sort = {
+    topic_filter = {
         'topics': {
             '$elemMatch': {'$eq': topic},
-        },
+            },
     }
-    return [_ for _ in mongo_collection.find(topic_sort)]
+    return [_ for _ in mongo_collection.find(topic_filter)]
