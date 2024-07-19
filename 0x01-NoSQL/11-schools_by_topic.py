@@ -15,4 +15,4 @@ def school_by_topic(mongo_collection, topic):
             '$elemMatch': {'$eq': topic},
             },
     }
-    return [_ for _ in mongo_collection.find(topic_filter)]
+    return [doc for doc in mongo_collection.find(topic_filter)]
