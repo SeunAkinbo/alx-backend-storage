@@ -17,4 +17,4 @@ def school_by_topic(mongo_collection, topic):
             },
         },
     }
-    return [mongo_collection.find(topic_sort)]
+    return [_ for _ in mongo_collection.find(topic_sort)]
