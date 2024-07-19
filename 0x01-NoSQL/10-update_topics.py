@@ -10,8 +10,7 @@ def update_topics(mongo_collection, name, topics):
     :param name: string, the school name to update
     :param topics: list of strings, the list of topics approached in the school
     """
-    result = mongo_collection.update_one(
-            {"name": name},
-            {"$set": {"topics": topics}}
-            )
-    return result.modified_count
+    mongo_collection.update_many(
+        {"name": name},
+        {"$set": {"topics": topics}}
+    )
