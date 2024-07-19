@@ -12,9 +12,7 @@ def school_by_topic(mongo_collection, topic):
     """
     topic_sort = {
         'topics': {
-            '$elemMatch': {
-                '$eq': topic,
-            },
+            '$elemMatch': {'$eq': topic},
         },
     }
     return [_ for _ in mongo_collection.find(topic_sort)]
